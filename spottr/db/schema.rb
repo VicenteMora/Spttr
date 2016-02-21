@@ -11,10 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221050349) do
+ActiveRecord::Schema.define(version: 20160221054433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "matches", force: :cascade do |t|
+    t.boolean  "isRejected"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "gender",        default: "Male",         null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "fitness_level", default: "intermediate", null: false
+    t.string   "gym"
+    t.string   "availability",  default: "afternoon",    null: false
+    t.integer  "user_id_id"
+    t.boolean  "over_18"
+    t.string   "headshot_url"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "profiles", ["user_id_id"], name: "index_profiles_on_user_id_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -29,6 +51,7 @@ ActiveRecord::Schema.define(version: 20160221050349) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "user_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
