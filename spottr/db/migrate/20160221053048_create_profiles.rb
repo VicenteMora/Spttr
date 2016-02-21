@@ -7,7 +7,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :fitness_level,   :null => false, :default => "intermediate"
       t.string :gym
       t.string :availability,    :null => false, :default =>  "afternoon"
-      t.references :user_id,      :index => true
+      t.references :user,      :index => true
       t.boolean :over_18
       t.string :headshot_url   
 
