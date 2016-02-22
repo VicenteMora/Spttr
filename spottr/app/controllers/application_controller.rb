@@ -6,8 +6,16 @@ class ApplicationController < ActionController::Base
   
 
   protected 
+
+  def check_profile
+
+  end
   
   def after_sign_in_path_for(resource)
-		new_profile_path
+		if user_signed_in? && current_user.profile
+			dashboard_path
+		else
+			new_profile_path
+		end
   end
 end

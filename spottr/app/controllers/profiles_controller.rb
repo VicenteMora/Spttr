@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+		before_action :authenticate_user!
 
 	def new
 		@profile = Profile.new
@@ -20,7 +21,7 @@ class ProfilesController < ApplicationController
     unless @user.profile
       render 'new'
     else
-     redirect_to '/dashboard'
+     redirect_to profile_path(@profile)
     end
   end
 

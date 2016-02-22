@@ -1,3 +1,8 @@
-<h1> Spottr Dashboard </h1>
+<h1> <em>Join Spotter! I got you!</em> </h1>
 
-
+<% unless user_signed_in? %>
+<%= link_to "sign-up", new_user_registration_path %>
+<% end %>
+<% unless user_signed_in? %>
+<%= link_to "Log in",   new_user_session_path %>
+<% end %>
