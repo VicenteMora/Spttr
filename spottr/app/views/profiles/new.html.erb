@@ -1,0 +1,11 @@
+
+
+
+
+<%= form_for @profile, url: {action: "new"} do |f| %>
+First Name: <%=	f.text_field :first_name %>
+Last Name: <%= f.text_field :last_name %>
+Over 18? <%= f.check_box :over_18 %>
+
+
+<% end %>
