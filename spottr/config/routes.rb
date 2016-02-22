@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   get '/' => "home#home"
 
+  resources :profiles
 end
