@@ -1,0 +1,22 @@
+<%= form_for @profile  do |f| %>
+First Name: <%=	f.text_field :first_name %> 
+Last Name: <%= f.text_field :last_name %> </br><br>
+Over 18? <%= f.check_box :over_18 %> </br><br>
+Gender:<br> <%= f.radio_button :gender, "Male" %> Male 
+		<%= f.radio_button :gender, "Female" %> Female </br><br>
+Fitness Level:<br> <%= f.radio_button :fitness_level, "Beginner" %> Beginner 
+			<%= f.radio_button :fitness_level, "intermediate" %> Intermediate 
+			<%= f.radio_button :fitness_level, "Expert" %> Expert 
+			<%= f.radio_button :fitness_level, "I Dont Care" %> I Dont Care </br><br>
+Availabilty:<br>
+			<%= f.radio_button :availability, "early_morning" %> Midnight - 6:00 A.M.
+			<%= f.radio_button :availability, "morning" %> 6:00 A.M. - Noon
+			<%= f.radio_button :availability, "afternoon" %> Noon - 6:00 P.M. 
+			<%= f.radio_button :availability, "evening" %> 6:00 P.M. - Midnight </br><br>
+Gym Membership Location: <br> <%= f.text_field :gym %><br><br>
+
+<%= f.submit 'Save' %>
+
+
+
+<% end %>

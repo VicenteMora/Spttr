@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  get '/' => "home#home"
+  get '/dashboard' => "home#home"
 
   resources :profiles
 end
