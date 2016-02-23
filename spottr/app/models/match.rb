@@ -1,4 +1,5 @@
 class Match < ActiveRecord::Base
-	has_many :users, through: :match_association
+	has_many :match_associations
+	has_many :users, through: :match_associations
 	has_many :messages
 end
