@@ -13,6 +13,12 @@ class ProfilesController < ApplicationController
 		@profile = Profile.find_by(id: params[:id])
 	end
 
+	def update
+		@profile = Profile.find_by(id: params[:id])
+		@profile.update_attributes(profile_params)
+		redirect_to profile_path(@profile)
+	end
+
 
 	def create
 		@user = current_user
