@@ -1,4 +1,5 @@
 class MatchAssociation < ActiveRecord::Base
-  belongs_to :user_id
-  belongs_to :match_id
+  belongs_to :user
+  
+  belongs_to :match, class_name: "User" 
 end
