@@ -9,15 +9,15 @@ class MatchesController < ApplicationController
 		    
     end
 
-
+#----------Check with Kayserr what exactly goes here-------
 	def match
-		@match.take(5)
+		# @match.take(5)
 	end
 
 	def create_matches 
-		@user = current_user
-		@match = Match.create(params[:match])
-		@user.match = @match 
+		# @user = current_user
+		# @match = Match.create(params[:match])
+		# @user.match = @match 
 	end
 
 	def reject

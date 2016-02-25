@@ -1,9 +1,9 @@
-<h1> These are your matches </h1>
+<h1> These are your matches <%= current_user.profile.first_name.capitalize %> </h1>
 
 
 <% @match.each do | match | %>
 	
-	<%= match.first_name %> 
+	<%= match.first_name %> <%=link_to "Message", new_message_path %> 
 	 <br>
 
 	<% end %>
