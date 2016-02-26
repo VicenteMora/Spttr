@@ -9,7 +9,7 @@ class MatchesController < ApplicationController
 		possible_profiles = []
 
 		Profile.all.each do |profile|
-			if profile.user != current_user
+			if profile.user != current_user && !current_user.matchedUsers.include?(User.find_by(id: profile.user.id))
 				
 			
 			 
@@ -45,12 +45,15 @@ class MatchesController < ApplicationController
 		# @match.take(5)
 	end
 
-	def create_matches 
-		newMatch = Match.new(:isRejected => false)
-			if newMatch.save
-				newMatchAssociationA = MatchAssociation.create(:user_id => current_user.id, :match_id => newMatch.id)
-				newMatchAssociationB = MatchAssociation.create(:user_id => params[:matched_user_id], :match_id => newMatch.id)
-			end
+	def create
+		if !current_user.matchedUsers.include?(User.find_by(id: params[:matched_user_id]))
+		newMatch = Match.create(:isRejected => false)
+		newMatchAssociationA = MatchAssociation.create(:user_id => current_user.id, :match_id => newMatch.id)
+		newMatchAssociationB = MatchAssociation.create(:user_id => params[:matched_user_id], :match_id => newMatch.id)
+		redirect_to(messages_path(newMatch.id))
+	else
+		redirect_to(messages_path(current_user.matches.select{|match| match.users.include?(User.find_by(id: params[:matched_user_id]))}))
+	end
 	end
 
 	def reject

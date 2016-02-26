@@ -1,3 +1,19 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#messageContainer{
+    position: absolute;
+    width: 25%;
+    height: 500px;
+    background-color: white;
+    bottom:-130% ;
+    left:0;
+    border: 2px solid black;
+    box-shadow: 5px 5px 5px 5px;
+    border-radius: 5px;
+     -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 0.75s;
+   transition: width 2s, height 2s, background-color 2s, transform 0.75s;
+}
+#messageContainer.slide{
+    transform:translateY(-155%)
+}

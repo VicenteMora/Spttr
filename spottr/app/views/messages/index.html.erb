@@ -1,2 +1,42 @@
 <h1>Messages#index</h1>
-<p>Find me in app/views/messages/index.html.erb</p>
+<% @messages.each do | message | %>
+	<div>    
+        USER ID = <%= message.user_id %>
+        Match ID = <%= message.match_id %>
+        Body = <%= message.body %>
+    </div>
+    <% end %>
+
+
+
+
+
+<form action="#" id="inputForm">
+<input type="text" id="messageInput"><button id="inputSubmit" type="submit">Send</button>
+</form>
+
+
+<script>
+    $(document).ready(function(){
+        $('.conversation_list_item').on('click', function(event) {
+            toggle_Message(event.target.id)
+        });
+
+
+        var toggle_Message = function(match_id) {
+        $.get({
+              url: "/messages/index/" + match_id,
+              success: handle_message_success,
+              error: function(response) {
+                  console.log("Error")
+              },
+              dataType: "JSON"
+            });
+        }
+            
+        var handle_message_success = function(data) {
+            console.log(data)
+        }
+    })
+</script>
+

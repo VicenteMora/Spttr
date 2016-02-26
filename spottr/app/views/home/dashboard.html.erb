@@ -1,6 +1,92 @@
+<div id="messageContainer" >
+    <div id="messageContainerBody" style="display: none;">
+        <ul class="list-unstyled" id="messageList"></ul>
+        <form action="#" id="inputForm">
+            <input type="text" id="messageInput"><button id="inputSubmit" type="submit">Send</button>
+        </form>
+    </div>
+</div>
 <h1> Spottr Dashboard <%= current_user.profile.first_name.capitalize %> </h1>
 
 
 
 <%= link_to "Edit Profile", edit_profile_path(current_user) %>
 <%= link_to "See Matches", matches_index_path(current_user) %>
+
+
+<h3>Conversations</h3>
+<ul class="list-unstyled">
+    <% current_user.matches.each do |match| %>
+        <li><a class="conversation_list_item" id="<%= match.id%>" href="#" ><%= match.otherUser(current_user.id).profile.name %></a></li>
+    <% end %>
+</ul>
+
+<script>
+    $(document).ready(function(){
+        $('.conversation_list_item').on('click', function(event) {
+            toggle_Message(event.target.id)
+        });
+
+
+        var toggle_Message = function(match_id) {
+        $.get({
+              url: "/messages/index/" + match_id,
+              success: handle_message_success,
+              error: function(response) {
+                  console.log("Error")
+              },
+              dataType: "JSON"
+            });
+        }
+            
+        var handle_message_success = function(data) {
+            if ($('#messageContainer').hasClass('slide')){
+                $('#messageContainer').removeClass('slide');
+            }
+            setTimeout(function(){
+                $('#messageList').empty()
+                data.response.forEach(function(message){
+                    if (message.user_id == parseInt("<%= current_user.id%>")){
+                        $('#messageList').append("<li style='text-align: left;'>"+ message.body +"</li>")
+                    }
+                    else {
+                        $('#messageList').append("<li style='text-align: right;'>"+ message.body +"</li>")
+                    }
+                });
+                $('#messageContainerBody').show();
+                $('#messageContainer').addClass('slide');
+            }, 750)
+            
+        }
+
+
+
+
+
+        var handle_input_submit = function(){
+            var match_id = false;
+            var $submit = $('#inputSubmit');
+            var $input = $('#messageInput');
+            var $inputForm = $('#inputForm');
+            $inputForm.on('submit', function(event){
+                event.preventDefault();
+                var message = $input.val();
+                $.post({
+                  url: "/messages/create/",
+                  data: {
+                      body : message,
+                      match_id: match_id,
+                  },
+                  success: function(response) {
+                      console.log("SUCCESS", response.response)
+                      location.reload()
+                  },
+                  error: function(response) {
+                      console.log("Error")
+                  },
+                  dataType: "JSON"
+                });
+        })
+        }
+    })
+</script>

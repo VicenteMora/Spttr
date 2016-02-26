@@ -3,7 +3,7 @@
 
 <% @profiles.each do | profile | %>
 	
-	<%= profile.name %> <%=link_to "Message", new_message_path %> 
+	<%= profile.name %> <%=link_to "Message", new_match_path(profile.user_id) %> 
 	 <br>
 
 	<% end %>
