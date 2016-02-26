@@ -26,7 +26,8 @@ class MatchesController < ApplicationController
 				if profile.over_18 == current_user.profile.over_18
 					points += 1
 				end
-				if points > 2
+				if points >= 4
+
 					matches.append(profile)
 				end
 			end
@@ -38,7 +39,7 @@ class MatchesController < ApplicationController
 				newMatchAssociationB = MatchAssociation.create(:user_id => match.user.id, :match_id => newMatch.id)
 			end
 		end
-		@match = Match.all.select {|match| match.match_associations[0].user = current_user || match.match_associations[1].user = current_user }		    
+		@match = current_user.matches		    
     end
 
 #----------Check with Kayserr what exactly goes here-------
