@@ -5,13 +5,14 @@ class MatchesController < ApplicationController
 		availability = current_user.profile.availability
 		fitness_level = current_user.profile.fitness_level
 		over_18 = current_user.profile.over_18
-		profiles = Profile.all
-		matches = []
+		
+		possible_profiles = []
 
-		profiles.each do |profile|
-			p "Deciding is match "
-			p "PROFILE MATCHES", profile.user.matches
-			if !profile.user.matches[0] || !profile.user.matches.select {|match| match.users.include?(current_user)} 
+		Profile.all.each do |profile|
+			if profile.user != current_user
+				
+			
+			 
 				p "Creating matches"
 				points = 0
 				if profile.availability == current_user.profile.availability
@@ -26,20 +27,17 @@ class MatchesController < ApplicationController
 				if profile.over_18 == current_user.profile.over_18
 					points += 1
 				end
-				if points >= 4
+				if points == 4
 
-					matches.append(profile)
+					possible_profiles.append(profile)
 				end
 			end
 		end
-		matches.each do |match|
-			newMatch = Match.new(:isRejected => false)
-			if newMatch.save
-				newMatchAssociationA = MatchAssociation.create(:user_id => current_user.id, :match_id => newMatch.id)
-				newMatchAssociationB = MatchAssociation.create(:user_id => match.user.id, :match_id => newMatch.id)
-			end
-		end
-		@match = current_user.matches		    
+		
+		
+			
+		
+		@profiles = possible_profiles	    
     end
 
 #----------Check with Kayserr what exactly goes here-------
@@ -48,9 +46,11 @@ class MatchesController < ApplicationController
 	end
 
 	def create_matches 
-		# @user = current_user
-		# @match = Match.create(params[:match])
-		# @user.match = @match 
+		newMatch = Match.new(:isRejected => false)
+			if newMatch.save
+				newMatchAssociationA = MatchAssociation.create(:user_id => current_user.id, :match_id => newMatch.id)
+				newMatchAssociationB = MatchAssociation.create(:user_id => params[:matched_user_id], :match_id => newMatch.id)
+			end
 	end
 
 	def reject
