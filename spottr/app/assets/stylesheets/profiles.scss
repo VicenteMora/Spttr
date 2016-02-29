@@ -1,3 +1,34 @@
+
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.profile_background{
+	background: url(/assets/footer_lodyas.png);
+	height:100vh;
+	width:100%;
+	position:relative;
+	z-index:-2;
+}
+.media{
+	z-index:10;
+}
+.profile_font{
+	
+	z-index:20;
+	font-family: 'Merriweather', serif;
+	color:white;
+	
+	
+}
+.overlay{
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:#F5D04C;
+	opacity:0.3;
+	height: 100vh;
+	width:100%;
+	z-index:-1;
+	
+
+}

@@ -1,18 +1,44 @@
-<h1> Welcome Back <%= current_user.email %>  <h1>
-<p>
+<div class="row profile_background">
+
+
+    <div class="col-lg-5">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object dp img-circle" src="http://static1.squarespace.com/static/54cb8609e4b0c436386e7f1d/54cb88fce4b0af4c303c4ba1/54cb8a0de4b04c8e2a3d1a34/1438805250154/1.11.14+-+Fitness+Shoot+Ramsy-701-Edit.jpg?format=500w" style="width: 500px;height:500px;">
+            </a>
+            
+        </div>
+
+    </div>
+    <div class="col-lg-7 text-center profile_font">
+		<h1> Welcome Back <%= current_user.email %> </h1><br><br>
+		<p>
 	
-	<ul>
-		<li><%= @profile.first_name %>
-		<%= @profile.last_name %></li>
-		<li><%= @profile.gender %></li>
-		<li><%= @profile.gym %></li>
-		<li><%= @profile.availability %></li>
-		<li><%= @profile.fitness_level %></li>
-	</ul>
+				<ul><h2>
+					<img class="img-padding" src="/assets/name-icon.png"><%= @profile.first_name %>
+					<%= @profile.last_name %><br><br>
+					<img class="img-padding" src="/assets/Male-gender-icon.png"><%= @profile.gender %><br><br>
+					<img class="img-padding" src="/assets/gym-icon.png"><%= @profile.gym %><br><br>
+					<img class="img-padding" src="/assets/availability-icon.png"><%= @profile.availability %><br><br>
+					<img class="img-padding" src="/assets/fitness-level-icon.png"><%= @profile.fitness_level %><br><br>
+				</h2></ul>
+		</p>
+				<%= link_to "Edit Profile", edit_profile_path %>
+				<%= link_to "Dashboard", dashboard_path %>
+    
+	</div>
+	<div class="overlay">
+		
+
+	</div>
+
+</div>
 
 
 
-<%= link_to "Edit Profile", edit_profile_path %>
-<%= link_to "Dashboard", dashboard_path %>
+ 
 
-</p>
+
+
+
+
