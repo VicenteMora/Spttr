@@ -1,8 +1,90 @@
-<h1> <em>Join Spotter! I got you!</em> </h1>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>SPTTR|I Got You|</title>
+	
+</head>
 
-<% unless user_signed_in? %>
-<%= link_to "sign-up", new_user_registration_path %>
-<% end %>
-<% unless user_signed_in? %>
-<%= link_to "Log in",   new_user_session_path %>
-<% end %>
+<body>
+<!-- ==========navigation bar============ -->
+
+<div class="navbar navbar-inverse navbar-twitch" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<span class="small-nav"> <span class="logo">
+					<button type="button" class="btn btn-default btn-xs navbar-twitch-toggle">
+					<span class="glyphicon glyphicon-chevron-right nav-open"></span>		
+					<span class="glyphicon glyphicon-chevron-left nav-close"></span>
+					</button> 
+
+				 </span> </span>
+				<span class="full-nav">  Spttr  </span>
+			</a>
+		</div>
+		<div class="">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="#">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Home"> 
+							<span class="glyphicon glyphicon-home"></span> 
+						</span>
+						<span class="full-nav"> Home </span>
+					</a>
+				</li>
+				<li>
+					<a href="/users/sign_up">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Sign Up"> 
+							<span class="fa fa-sign-in"></span> 
+						</span>
+						<span class="full-nav"> Sign Up </span>
+					</a>
+				</li>
+				<li>
+					<a href="/users/sign_in">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Log in"> 
+							<span class="fa fa-users"></span> 
+						</span>
+						<span class="full-nav"> Log in </span>
+					</a>
+				</li>
+				<li>
+					<a href="/users/sign_out">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Log out"> 
+							<span class="fa fa-sign-out"></span> 
+						</span>
+						<span class="full-nav"> Sign Out </span>
+					</a>
+				</li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>
+
+<!-- ===========video/picture ============ -->
+			<div class="container-fluid">
+				<div class= "row picture">
+				
+					<img class="banner" alt="banner" src="/assets/vintage-weights.jpg">
+				</div>
+
+				<div class= "row picture1">
+					<img class="about" alt="about" src="/assets/backgroundpic.jpg">
+
+				</div>
+
+			</div>
+<!-- ===========About/Why/Consistency========== -->
+
+			
+			
+			<!--  -->
+</body>
+</html>
+
+
+
+
+
+
+

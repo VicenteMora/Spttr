@@ -4,3 +4,5 @@
   Static version of css will use Glyphicons sprites by default
   =require twitter-bootstrap-static/sprites
 */
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
