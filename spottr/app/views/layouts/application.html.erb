@@ -11,8 +11,60 @@
 </head>
 <body>
 <% if user_signed_in?%>
-	<%= link_to "Logout", destroy_user_session_path, method: "DELETE" %>
-<% end %>
+	<%#= link_to "Logout", destroy_user_session_path, method: "DELETE" %>
+<% end %> 
+<div class="navbar navbar-inverse navbar-twitch" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">
+				<span class="small-nav"> <span class="logo">
+					<button type="button" class="btn btn-default btn-xs navbar-twitch-toggle">
+					<span class="glyphicon glyphicon-chevron-right nav-open"></span>		
+					<span class="glyphicon glyphicon-chevron-left nav-close"></span>
+					</button> 
+
+				 </span> </span>
+				<span class="full-nav">  Spttr  </span>
+			</a>
+		</div>
+		<div class="">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="#">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Home"> 
+							<span class="glyphicon glyphicon-home"></span> 
+						</span>
+						<span class="full-nav"> Home </span>
+					</a>
+				</li>
+				<li>
+					<a href="/users/sign_up">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Sign Up"> 
+							<span class="fa fa-sign-in"></span> 
+						</span>
+						<span class="full-nav"> Sign Up </span>
+					</a>
+				</li>
+				<li>
+					<a href="/users/sign_in">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Log in"> 
+							<span class="fa fa-users"></span> 
+						</span>
+						<span class="full-nav"> Log in </span>
+					</a>
+				</li>
+				<li>
+					<a rel="nofollow" data-method="DELETE" href="/users/sign_out">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" title="Log out"> 
+							<span class="fa fa-sign-out"></span> 
+						</span>
+						<span class="full-nav"> Sign Out </span>
+					</a>
+				</li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>
 <%= yield %>
 
 </body>
