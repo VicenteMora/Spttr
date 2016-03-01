@@ -1,3 +1,63 @@
+
+<div class="container">
+            <div class="row1"></div>
+              <div class="col-sm-3">
+                  <div class="profile_pic_dashboard">
+                      <img src="http://i0.wp.com/causefitness.com/wp-content/uploads/2012/05/TD_RX_06232010_0211_V1_LR.jpg?fit=400%2C400" class="img-circle" style="width:200px;height:200px;">
+                  </div>
+              </div>
+              <div class="col-sm-9">
+                <div class="info_dashboard">
+                  <h1> Spottr  <%= current_user.profile.first_name.capitalize %> </h1>
+                  <%= link_to "Edit Profile", edit_profile_path(current_user) %>
+                  <%= link_to "See Matches", matches_index_path(current_user) %>
+                </div>
+
+              </div>
+
+              <div class="row2">
+                <div class="col-sm-4">
+                 
+                    <div class="displayed chat_icon">
+                        <img src="/assets/chat-icon.png">
+                        <p> Chat with your matches! </p>
+
+                    </div>
+                    
+                </div>
+                  <div class="col-sm-4">
+                      <div class="displayed spttr_icon">
+                        <img src="/assets/spttr-logo2.png" class="img-circle">
+                        
+                      </div>
+                  </div>
+                  
+                  <div class="col-sm-4">
+                      <div class="displayed match_icon">
+                        <img src="/assets/match-icon.png">
+                        <p> Find your matches!</p>
+                        
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row3">
+                    <div class="info_section">
+                      
+                    </div>
+
+              </div>
+
+
+
+
+
+
+
+
+
+
+
 <div id="messageContainer" >
     <div id="messageContainerBody" style="display: none;">
         <ul class="list-unstyled" id="messageList"></ul>
@@ -6,12 +66,11 @@
         </form>
     </div>
 </div>
-<h1> Spottr Dashboard <%= current_user.profile.first_name.capitalize %> </h1>
 
 
 
-<%= link_to "Edit Profile", edit_profile_path(current_user) %>
-<%= link_to "See Matches", matches_index_path(current_user) %>
+
+
 
 
 <h3>Conversations</h3>
@@ -90,3 +149,4 @@
         }
     })
 </script>
+</div>

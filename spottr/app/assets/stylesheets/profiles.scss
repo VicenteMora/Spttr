@@ -7,14 +7,14 @@
 	height:100vh;
 	width:100%;
 	position:relative;
-	z-index:-2;
+	z-index:1;
 }
 .media{
 	z-index:10;
 }
 .profile_font{
 	
-	z-index:20;
+	z-index:2;
 	font-family: 'Merriweather', serif;
 	color:white;
 	
@@ -31,4 +31,8 @@
 	z-index:-1;
 	
 
+}
+#profile_first_name,#profile_last_name,#profile_gym
+{
+	color:black;
 }
