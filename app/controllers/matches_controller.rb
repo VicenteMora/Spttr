@@ -1,19 +1,9 @@
 class MatchesController < ApplicationController
 
 	def index
-		gym = current_user.profile.gym 
-		availability = current_user.profile.availability
-		fitness_level = current_user.profile.fitness_level
-		over_18 = current_user.profile.over_18
-		
 		possible_profiles = []
-
 		Profile.all.each do |profile|
 			if profile.user != current_user && !current_user.matchedUsers.include?(User.find_by(id: profile.user.id))
-				
-			
-			 
-				p "Creating matches"
 				points = 0
 				if profile.availability == current_user.profile.availability
 					points += 1
@@ -33,10 +23,6 @@ class MatchesController < ApplicationController
 				end
 			end
 		end
-		
-		
-			
-		
 		@profiles = possible_profiles	    
     end
 
@@ -50,7 +36,7 @@ class MatchesController < ApplicationController
 		newMatch = Match.create(:isRejected => false)
 		newMatchAssociationA = MatchAssociation.create(:user_id => current_user.id, :match_id => newMatch.id)
 		newMatchAssociationB = MatchAssociation.create(:user_id => params[:matched_user_id], :match_id => newMatch.id)
-		redirect_to(messages_path(newMatch.id))
+		redirect_to("/dashboard")
 	else
 		redirect_to(messages_path(current_user.matches.select{|match| match.users.include?(User.find_by(id: params[:matched_user_id]))}))
 	end

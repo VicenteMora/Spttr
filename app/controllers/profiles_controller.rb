@@ -10,7 +10,9 @@ class ProfilesController < ApplicationController
 	end
 
 	def edit
-		@profile = Profile.find_by(id: params[:id])
+    @user=User.find_by(id: current_user.id)
+		@profile = @user.profile
+    # Profile.find_by(id: params[:id])
 	end
 
 	def update

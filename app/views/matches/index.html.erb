@@ -1,9 +1,9 @@
-<h1> These are your matches <%= current_user.profile.first_name.capitalize %> </h1>
-
-
+<!-- <h1> These are your matches <%= current_user.profile.first_name.capitalize %> </h1>
+ -->
 <% @profiles.each do | profile | %>
-	
 	<%= profile.name %> <%=link_to "Message", new_match_path(profile.user_id) %> 
 	 <br>
-
-	<% end %>
+<% end %>
+<% if !@profiles %>
+	<h3>Sorry, No new matches</h3>
+<% end %>

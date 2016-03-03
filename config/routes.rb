@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get '/matches/create/:matched_user_id' => 'matches#create', as: "new_match"
   resources :profiles
   get '/messages/index/:match_id' => 'messages#index', as: 'messages'
-  post '/messages/create/' => 'messages#create', as: 'create_message'
-
+  post '/messages/create' => 'messages#create', as: 'create_message'
+  post '/messages/poll/' => 'messages#poll'
   
 end

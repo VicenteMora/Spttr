@@ -3,5 +3,11 @@
 <h2>Update your profile <%= current_user.email %> </h2> 
 <%= render 'form' %>
 
-<%= link_to "Delete Profile", profile_path(@profile), method: :delete %>
+<a rel="nofollow" data-method="delete" href="/profiles/<%= current_user.id %>"> <button type="button" class= "btn btn-labeled btn-danger"> <span class="btn-label"><i class="fa fa-trash-o"></i></span>Delete Profile</button> </a>
+
+<!-- <%= link_to "Delete Profile", profile_path(@profile), method: :delete %>
+<button type="button" class="btn btn-labeled btn-danger">
+  <span class="btn-label"><i class="glyphicon glyphicon-trash"></i></span>Delete Profile</button> -->
 </div>
+
+

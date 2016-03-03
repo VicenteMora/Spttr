@@ -1,93 +1,121 @@
 
-<div class="container">
-            <div class="row1"></div>
+<div class="container_fluid">
+            <div class="row row1"></div>
               <div class="col-sm-3">
                   <div class="profile_pic_dashboard">
-                      <img src="http://i0.wp.com/causefitness.com/wp-content/uploads/2012/05/TD_RX_06232010_0211_V1_LR.jpg?fit=400%2C400" class="img-circle" style="width:200px;height:200px;">
+                      <img src="https://www.teachforamerica.org/sites/default/files/styles/large/public/thumbnails/image/headshot.png?itok=EW2-dSgB" class="img-circle" style="width:200px;height:200px;">
                   </div>
               </div>
               <div class="col-sm-9">
                 <div class="info_dashboard">
-                  <h1> Spottr  <%= current_user.profile.first_name.capitalize %> </h1>
-                  <%= link_to "Edit Profile", edit_profile_path(current_user) %>
-                  <%= link_to "See Matches", matches_index_path(current_user) %>
+                  <p class="info_font" > Spottr  <%= current_user.profile.first_name.capitalize %> </p>
+                  
+                    <%#= link_to "Edit Profile", edit_profile_path(current_user)%>
+                    <a href="/profiles/<%= current_user.id%>/edit"> <button type="button" class= "btn btn-labeled btn-primary">
+                  <span class="btn-label"><i class="fa fa-pencil-square-o"></i></span>Edit Profile</button> </a>
+                  <!--<%= link_to "See Matches", matches_index_path(current_user) %> -->
+                  <!-- <a href="/matches/index"> <button type="button" class= "btn btn-labeled btn-primary">
+                  <span class="btn-label"><i class="fa fa-bullseye"></i></span>See Matches</button> </a> -->
                 </div>
 
               </div>
 
-              <div class="row2">
+              <div class="row row2">
                 <div class="col-sm-4">
                  
-                    <div class="chat_icon">
+                    <div class="chat_icon text-center dashboard_font">
                         <img src="/assets/chat-icon.png" class="center">
                         <p> Chat with your matches! </p>
 
                     </div>
                     
                 </div>
-                  <div class="col-sm-4">
-                      <div class="spttr_icon">
-                        <img src="/assets/spttr-logo2.png" class="img-circle center">
+                  <div class="col-sm-4 middle_column" >
+                      <div class="spttr_icon center text-center dashboard_font " >
+                        <div class="matchesBox" style="display: none;">
+                          <% @profiles.each do | profile | %>
+                            <%= profile.name %> <%=link_to "Message", new_match_path(profile.user_id) %> 
+                             <br>
+                          <% end %>
+                          <% if !@profiles[0] %>
+                            <h3>Sorry, No new matches</h3>
+                          <% end %>
+                        </div>
                         
                       </div>
                   </div>
                   
                   <div class="col-sm-4">
-                      <div class="match_icon">
-                        <img src="/assets/match-icon.png" class="center">
-                        <p> Find your matches!</p>
-                        
-                      </div>
-                  </div>
+                  <a href="#" onclick="loadMatches()">
+                        <div class="match_icon text-center dashboard_font">
+                          <img src="/assets/match-icon.png" class="center">
+                          <p> Find your matches!</p>
+                          
+                        </div>
+                    </div>
+                  </a>
               </div>
 
-              <div class="row3">
+              <div class="row row3">
                     <div class="info_section">
-                      
+                     
+                          <ul class="list-unstyled text-center dashboard_font">
+                           <h3>Conversations</h3>
+                              <% current_user.matches.each do |match| %>
+                                  <li><a class="conversation_list_item" id="<%= match.id%>" href="#" ><%= match.otherUser(current_user.id).profile.name %></a></li>
+                              <% end %>
+                          </ul>
                     </div>
 
               </div>
+              </div>
 
+<div class="navbar navbar-inverse navbar-twitch2 twitch2  collapsable "  role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <span class="small-nav"> <span class="logo">
+          <button type="button" class="btn btn-default btn-xs navbar-twitch-toggle2 switch" id="twitch_2">
+          <span class="glyphicon glyphicon-chevron-right nav-open"></span>    
+          <span class="glyphicon glyphicon-chevron-left nav-close"></span>
+          </button> 
 
-
-
-
-
-
-
-
-
-
-<div id="messageContainer" >
+         </span> </span>
+        <span class="full-nav">  Chat  </span>
+      </a>
+    </div>
+    <div class="">
+      <div class="container-fluid">
+        <div class="col-xs-12" id="chatBox" style="display:none;">
+           <form action="#" id="inputForm">
+          <input type="text" id="messageInput" class="form-control"><button id="inputSubmit" class='btn btn-success btn-block'type="submit">Send</button>
+       </form>
+        </div>
+        <div class="col-xs-12">
+          <ul class="list-unstyled" id="messageList"></ul>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- <div id="messageContainer" >
     <div id="messageContainerBody" style="display: none;">
         <ul class="list-unstyled" id="messageList"></ul>
         <form action="#" id="inputForm">
             <input type="text" id="messageInput"><button id="inputSubmit" type="submit">Send</button>
         </form>
-    </div>
-</div>
-
-
-
-
-
-
-
-<h3>Conversations</h3>
-<ul class="list-unstyled">
-    <% current_user.matches.each do |match| %>
-        <li><a class="conversation_list_item" id="<%= match.id%>" href="#" ><%= match.otherUser(current_user.id).profile.name %></a></li>
-    <% end %>
-</ul>
+ </div> -->
 
 <script>
     $(document).ready(function(){
+      var poll
         $('.conversation_list_item').on('click', function(event) {
-            toggle_Message(event.target.id)
+            toggle_Message(event.target.id);
+
         });
 
 
         var toggle_Message = function(match_id) {
+
         $.get({
               url: "/messages/index/" + match_id,
               success: handle_message_success,
@@ -95,14 +123,30 @@
                   console.log("Error")
               },
               dataType: "JSON"
-            });
+        });
+
+
+            // var message1=$('#messageInput').val();
+           
+            // $.post({
+            //   url: " /messages/create/"+match_id,
+            //   data: { body: message1 },
+            //   success: function(response){
+
+            //   },
+            //   error: function(response) {
+            //       console.log("Error")
+            //   },
+            //    dataType: "JSON"
+            // });
+        
         }
+
             
         var handle_message_success = function(data) {
-            if ($('#messageContainer').hasClass('slide')){
-                $('#messageContainer').removeClass('slide');
-            }
-            setTimeout(function(){
+          console.log(data)
+                $('.twitch2').addClass("open")
+                $('#chatBox').show()
                 $('#messageList').empty()
                 data.response.forEach(function(message){
                     if (message.user_id == parseInt("<%= current_user.id%>")){
@@ -112,22 +156,18 @@
                         $('#messageList').append("<li style='text-align: right;'>"+ message.body +"</li>")
                     }
                 });
+                $('#messageInput').attr('data-id', data.match_id)
                 $('#messageContainerBody').show();
-                $('#messageContainer').addClass('slide');
-            }, 750)
-            
+                clearInterval(poll)
+                pollStart(data.match_id, data.last_timestamp)
         }
 
-
-
-
-
-        var handle_input_submit = function(){
-            var match_id = false;
-            var $submit = $('#inputSubmit');
-            var $input = $('#messageInput');
-            var $inputForm = $('#inputForm');
-            $inputForm.on('submit', function(event){
+            $('#inputForm').on('submit', function(event){
+                console.log('HIT SUBMIT');
+                var match_id = $('#messageInput').attr('data-id');
+                var $submit = $('#inputSubmit');
+                var $input = $('#messageInput');
+                var $inputForm = $('#inputForm');
                 event.preventDefault();
                 var message = $input.val();
                 $.post({
@@ -138,15 +178,68 @@
                   },
                   success: function(response) {
                       console.log("SUCCESS", response.response)
-                      location.reload()
+                      $input.val('');
                   },
                   error: function(response) {
                       console.log("Error")
                   },
                   dataType: "JSON"
                 });
-        })
+             });
+            var pollStart = function(match_id, startPoint) {
+              this.startPoint = startPoint
+              var self = this;
+              poll = setInterval(function(){
+                 $.get({
+                      url: "/messages/index/" + match_id,
+                      success: handle_message_success,
+                      error: function(response) {
+                          console.log("Error")
+                      },
+                      dataType: "JSON"
+                });
+              }, 1000);
         }
-    })
+    });
+
+     
+    // var pollStart = function(match_id, startPoint) {
+    //   this.startPoint = startPoint
+    //   var self = this;
+    //   setInterval(function(){
+    //       $.post({ 
+    //         url: "/messages/poll/", 
+    //         data: {
+    //                   timestamp : self.startPoint,
+    //                   match_id: match_id
+    //         },
+    //         success: function(data){
+    //           appendNewMessages(data)
+    //           console.log(data.response);
+    //           console.log(startPoint)
+    //           if (data.response && data.response[data.response.length - 1 ]){
+    //             self.startPoint = data.last_timestamp
+    //           }
+    //         }, 
+    //         error: function(response) {
+    //               console.log("Error")
+    //         },
+    //         dataType: "JSON"
+    //       });
+    //   }, 1000);
+    // }
+    var appendNewMessages = function(data) {
+      data.response.forEach(function(message){
+        if (message.user_id == parseInt("<%= current_user.id%>")){
+            $('#messageList').append("<li style='text-align: left;'>"+ message.body +"</li>")
+        }
+        else {
+            $('#messageList').append("<li style='text-align: right;'>"+ message.body +"</li>")
+        }
+    });
+    }
+    var loadMatches = function() {
+      $('.matchesBox').show();
+    }
 </script>
-</div>
+<!-- </div> -->

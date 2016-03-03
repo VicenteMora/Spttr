@@ -24,15 +24,40 @@
     // position:relative;
     // top:0;
     width: 100%;
-    height: 100%;
+    // height: 100%;
     // top:0;
-    z-index:-2;
+    
+}
+.web_logo{
+   position: absolute;
+   top:7px;
+    height: 160px;
+    right: 45%;
 }
 
-.about {
-    width:100%;
-    height:100%;
+
+
+
+
+.row_picture1{
+    height:100vh;
+    
+    background-image: url("/assets/backgroundpic.jpg");
+    
+
 }
+.font1{
+    font-family: 'Merriweather', serif;
+        color:#F5D04C;
+        vertical-align: middle;
+        padding-top: 15%;
+        font-size: 30px;
+}
+.text_color{
+    color:white;
+    background:rgba(0,0,0,0.8);
+}
+
 
 body {
     
@@ -140,3 +165,5 @@ body {
 .navbar-twitch.open ~ .navbar-twitch-toggle > .nav-close {
     display: inline-block;
 }
+
+

@@ -1,10 +1,16 @@
 class MessagesController < ApplicationController
   def index
    @match = Match.find_by(:id => params[:match_id])
-     @messages = @match.messages.order("created_at")
+     @messages = @match.messages.order("created_at DESC")
+     p @messages
+     if @messages.last
+      last_time = @messages.last.created_at
+    else
+      last_time = Time.now
+    end
     respond_to do |format|
      format.html { render('index')}
-     format.json  { render :json => { status: 200, response: @messages}}
+     format.json  { render :json => { status: 200, response: @messages, match_id: params[:match_id], last_timestamp: last_time }}
    end
  end
 
@@ -13,7 +19,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    body = params[:body]
+
+    body = params[:body] #where does the body come from
     target_match_id = params[:match_id]
     Message.create(:body => body, :match_id => target_match_id, :user_id => current_user.id)
      respond_to do |format|
@@ -29,6 +36,17 @@ class MessagesController < ApplicationController
    # end
   	# @message = Message.create(params[:message])
   	# @message.save
+  end
+
+  def poll
+     @match = Match.find_by(:id => params[:match_id])
+     @messages = @match.messages.where('created_at > ?', params[:timestamp]).order("created_at DESC")
+     p @messages
+     # @messages.delete(@messages.first)
+    respond_to do |format|
+     format.html { render('index')}
+     format.json  { render :json => { status: 200, response: @messages}}
+   end
   end
 
   def new
